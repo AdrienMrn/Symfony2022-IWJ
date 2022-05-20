@@ -27,6 +27,7 @@ services:
       <<: *app-cache-from
     depends_on:
       - db
+      - mailcatcher
     environment:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
@@ -54,6 +55,12 @@ services:
     ports:
       - "80:80"
       - "443:443"
+
+  mailcatcher:
+    image: dockage/mailcatcher:0.7.1
+    ports:
+      - "1080:1080"
+      - "1025:1025"
 
 volumes:
   db-data: {}

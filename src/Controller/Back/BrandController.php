@@ -36,7 +36,7 @@ class BrandController extends AbstractController
             return $this->redirectToRoute('back_brand_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('brand/new.html.twig', [
+        return $this->renderForm('back/brand/new.html.twig', [
             'brand' => $brand,
             'form' => $form,
         ]);
@@ -62,7 +62,7 @@ class BrandController extends AbstractController
             return $this->redirectToRoute('back_brand_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('brand/edit.html.twig', [
+        return $this->renderForm('back/brand/edit.html.twig', [
             'brand' => $brand,
             'form' => $form,
         ]);
