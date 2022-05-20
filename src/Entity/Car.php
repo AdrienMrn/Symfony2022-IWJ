@@ -2,16 +2,30 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\BlameableTrait;
+use App\Entity\Traits\TimestampableTrait;
 use App\Repository\CarRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
  */
 class Car
 {
+    use TimestampableTrait;
+    use BlameableTrait;
+
+    const HORSE_POWER = [
+        '2' => '2',
+        '50' => '50',
+        '60' => '60',
+        '100' => '100',
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -21,8 +35,15 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $model;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @Gedmo\Slug(fields={"model"})
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -69,6 +90,24 @@ class Car
     {
         $this->model = $model;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Car
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
         return $this;
     }
 

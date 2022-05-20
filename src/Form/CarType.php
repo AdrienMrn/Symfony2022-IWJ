@@ -27,12 +27,7 @@ class CarType extends AbstractType
             ])
             ->add('horsePower', ChoiceType::class, [
                 'label' => 'Nombre de chevaux',
-                'choices' => [
-                    '2' => '2',
-                    '50' => '50',
-                    '60' => '60',
-                    '100' => '100',
-                ],
+                'choices' => Car::HORSE_POWER,
             ])
             ->add('matriculation', TextType::class, [
                 'label' => 'Immatriculation'
@@ -47,16 +42,6 @@ class CarType extends AbstractType
                     return $er->createQueryBuilder('b')
                         ->orderBy('b.name', 'ASC');
                 },
-            ])
-            ->add('pwd', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'mapped' => false,
-                'first_options' => [
-                    'label' => 'Votre mot de passe plz'
-                ],
-                'second_options' => [
-                    'label' => 'Répéter votre mot de passe plz'
-                ]
             ])
         ;
     }

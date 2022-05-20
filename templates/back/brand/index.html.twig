@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>actions</th>
+                <th>move</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,10 @@
                 <td>
                     <a href="{{ path('back_brand_show', {'id': brand.id}) }}">show</a>
                     <a href="{{ path('back_brand_edit', {'id': brand.id}) }}">edit</a>
+                </td>
+                <td>
+                    <a href="{{ path('back_brand_move', {'id': brand.id, 'position': 'up'}) }}">Up</a>
+                    <a href="{{ path('back_brand_move', {'id': brand.id, 'position': 'down'}) }}">Down</a>
                 </td>
             </tr>
         {% else %}

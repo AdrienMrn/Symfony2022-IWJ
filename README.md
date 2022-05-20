@@ -51,3 +51,13 @@ docker compose exec php composer require --dev orm-fixtures
 docker compose exec php composer require --dev fzaninotto/faker
 ```
 
+#### Sécurité 
+Assert : https://symfony.com/doc/current/validation.html
+
+#### Auth
+Commande pour installer le système d'authentification
+```
+    bin/console make:user
+    bin/console make:auth
+```
+

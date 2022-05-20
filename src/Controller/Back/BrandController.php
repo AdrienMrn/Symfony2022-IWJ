@@ -18,7 +18,7 @@ class BrandController extends AbstractController
     public function index(BrandRepository $brandRepository): Response
     {
         return $this->render('back/brand/index.html.twig', [
-            'brands' => $brandRepository->findAll(),
+            'brands' => $brandRepository->findBy([], ['position' => 'ASC']),
         ]);
     }
 
@@ -75,6 +75,17 @@ class BrandController extends AbstractController
             $entityManager->remove($brand);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('back_brand_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/{position}', name: 'brand_move', methods: ['GET'], requirements: ['position' => 'up|down'])]
+    public function move($position, Brand $brand, EntityManagerInterface $entityManager): Response
+    {
+        $position = $position === 'up' ? $brand->getPosition()-1 : $brand->getPosition()+1;
+        $brand->setPosition($position);
+        $entityManager->flush();
+
 
         return $this->redirectToRoute('back_brand_index', [], Response::HTTP_SEE_OTHER);
     }
