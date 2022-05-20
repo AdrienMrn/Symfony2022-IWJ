@@ -2,6 +2,7 @@
 
 namespace App\Entity\Traits;
 
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -26,7 +27,7 @@ trait BlameableTrait
     /**
      * @return string|null
      */
-    public function getCreatedBy(): ?string
+    public function getCreatedBy(): ?User
     {
         return $this->createdBy;
     }
@@ -44,7 +45,7 @@ trait BlameableTrait
     /**
      * @return string|null
      */
-    public function getUpdatedBy(): ?string
+    public function getUpdatedBy(): ?User
     {
         return $this->updatedBy;
     }

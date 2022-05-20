@@ -5,7 +5,10 @@ namespace App\Controller\Back;
 use App\Entity\Brand;
 use App\Form\BrandType;
 use App\Repository\BrandRepository;
+use App\Security\BrandVoter;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,8 +54,12 @@ class BrandController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'brand_edit', methods: ['GET', 'POST'])]
+    #[IsGranted(BrandVoter::EDIT, 'brand')]
+    //#[Security("is_granted('edit', brand)")]
     public function edit(Request $request, Brand $brand, EntityManagerInterface $entityManager): Response
     {
+        //$this->denyAccessUnlessGranted(BrandVoter::EDIT, $brand);
+
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 

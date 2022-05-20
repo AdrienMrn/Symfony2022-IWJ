@@ -15,6 +15,12 @@
                 <th>Name</th>
                 <td>{{ brand.name }}</td>
             </tr>
+            <tr>
+                <td>Image</td>
+                <td>
+                    <img src="{{ vich_uploader_asset(brand, 'imageFile') }}" alt="">
+                </td>
+            </tr>
         </tbody>
     </table>
 
